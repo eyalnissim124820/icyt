@@ -60,7 +60,7 @@ export async function loadAll(onProgress) {
     });
   }
   for (const [key, info] of Object.entries(index)) {
-    const [name, short] = CHAR_INFO[key] || [key, key];
+    const [name, short] = info.name ? [info.name, info.short || info.name] : CHAR_INFO[key] || [key, key];
     const ch = { key, name, short, frames: [], sounds: {} };
     info.sounds.forEach((s, i) => { ch.sounds[CHAR_SOUNDS[i]] = `${BASE}characters/${key}/${s}`; });
     characters.push(ch);

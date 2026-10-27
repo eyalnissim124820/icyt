@@ -49,6 +49,16 @@ Node 18+ is the only requirement; there are no dependencies to install. Any stat
 
 `api/scores.js` re-runs each submitted replay with `src/sim.js`. Only the score that simulation produces is stored, and only for classic games.
 
+## Adding a character
+
+Draw or generate a sprite sheet: 15 poses in a 5×3 grid on a solid magenta (#FF00FF) background, facing right, in the game's frame order (idle, walk ×4, jump up / peak / down, straight jump, idle 2, idle 3, scared, cartwheel, edge wobble ×2). `assets/characters/harold/001_BMP.png` … `015_BMP.png` show what each pose looks like. Then run:
+
+```bash
+python3 tools/add_character.py sheet.png chick "Chick"   # needs Pillow
+```
+
+The script cuts out each pose, scales it to the original 52 px character height and removes the magenta. It saves the frames to `assets/characters/<key>/` and registers the character in `assets/characters/index.json`, reusing Harold's voice by default (`--sounds-from`). The character then appears under **Options → GFX Options → Character**.
+
 ## Project layout
 
 ```
