@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Icy Tower</title>
+<meta name="description" content="Icy Tower in your browser: climb the tower, chain combo jumps and set a high score.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="assets/gfx/MENU_BULLET.png">
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; touch-action: none; }
+  body { font-family: system-ui, sans-serif; }
+  canvas { position: absolute; display: block; image-rendering: pixelated; image-rendering: crisp-edges; background: #000; }
+  #touch { display: none; }
+  body.touch #touch { display: block; }
+  .tbtn {
+    position: fixed; bottom: max(12px, env(safe-area-inset-bottom)); width: var(--btn, 80px); height: var(--btn, 80px);
+    border-radius: 50%; border: 3px solid rgba(255,255,255,.55); background: rgba(255,255,255,.12);
+    color: #fff; font: bold 28px system-ui, sans-serif; display: flex; align-items: center; justify-content: center;
+    user-select: none; -webkit-user-select: none; touch-action: none;
+  }
+  .tbtn.on { background: rgba(255,255,255,.35); }
+  #t-left { left: 12px; }
+  #t-right { left: calc(24px + var(--btn, 80px)); }
+  #t-jump { right: 12px; }
+  #t-pause { position: fixed; top: max(10px, env(safe-area-inset-top)); right: 10px; width: 44px; height: 44px; font-size: 18px; bottom: auto; border-radius: 10px; }
+  #prompt { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.5); }
+  #prompt[hidden] { display: none; }
+  #prompt form { background: #f4ecd2; color: #222; border: 4px solid #3a2410; border-radius: 10px; padding: 18px 20px; display: grid; gap: 12px; min-width: 260px; max-width: calc(100vw - 32px); box-sizing: border-box; }
+  #prompt label { font-weight: 700; }
+  #prompt input { font-size: 20px; padding: 8px; border: 2px solid #3a2410; border-radius: 6px; background: #fff; color: #222; }
+  #prompt .row { display: flex; gap: 8px; justify-content: flex-end; }
+  #prompt button { font-size: 16px; padding: 8px 14px; border-radius: 6px; border: 2px solid #3a2410; background: #ffd23f; color: #222; cursor: pointer; }
+  #prompt .cancel { background: #ddd; }
+  #credit { position: fixed; bottom: 4px; right: 8px; font-size: 11px; color: #777; }
+  #credit a { color: #999; }
+  #credit[hidden], body.touch #credit { display: none; }
+</style>
+</head>
+<body>
+<canvas id="game" width="640" height="480" aria-label="Icy Tower game"></canvas>
+<div id="touch" aria-hidden="true">
+  <div class="tbtn" id="t-left">&#9664;</div>
+  <div class="tbtn" id="t-right">&#9654;</div>
+  <div class="tbtn" id="t-jump">JUMP</div>
+  <div class="tbtn" id="t-pause">II</div>
+</div>
+<div id="prompt" hidden>
+  <form>
+    <label for="prompt-input">Name</label>
+    <input id="prompt-input" autocomplete="nickname" spellcheck="false">
+    <div class="row"><button type="button" class="cancel">Cancel</button><button type="submit">OK</button></div>
+  </form>
+</div>
+<input type="file" id="file" accept=".json,application/json" hidden>
+<div id="credit">Icy Tower&reg; by <a href="http://www.freelunchdesign.com" target="_blank" rel="noopener">Free Lunch Design</a></div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
